@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".frags.Profile">
+
+    <!-- 배경색이 포함된 상단 레이어 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:background="@color/main_orange"
+        android:padding="16dp">
+    </LinearLayout>
+
+    <!-- 첫 번째 카드 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="120dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:radius="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="80dp"
+            android:text="만 00세"
+            android:textColor="@color/colorGray"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="80dp"
+            android:text="가입 000일 째"
+            android:textColor="@color/colorGray"
+            android:fontFamily="@font/bmjua"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:radius="20dp">
+
+        <!-- 이미지 뷰를 마지막에 배치 -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="top|center"
+            android:elevation="10dp"
+            android:src="@drawable/icon_simple_no_back2"
+            android:background="@drawable/profile_bg"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:text="user_name 님"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <!-- 두 번째 카드 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:radius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="email"
+                android:textSize="16sp"
+                android:textColor="@color/colorGray"
+                android:fontFamily="@font/lsss_b"
+                android:layout_weight="2"
+                android:background="?android:attr/selectableItemBackground" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="abcdef@google.com"
+                android:textSize="16sp"
+                android:fontFamily="@font/lsss_b"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="생년월일"
+                android:textSize="16sp"
+                android:textColor="@color/colorGray"
+                android:fontFamily="@font/lsss_b"
+                android:layout_weight="2"
+                android:background="?android:attr/selectableItemBackground" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="yyyy-mm-dd"
+                android:textSize="16sp"
+                android:fontFamily="@font/lsss_b"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="개인정보수정"
+            android:textSize="16sp"
+            android:fontFamily="@font/lsss_b"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="고객센터"
+            android:textSize="16sp"
+            android:fontFamily="@font/lsss_b"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Log-out"
+            android:textColor="@color/main_orange"
+            android:background="@drawable/btn_bg2"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</FrameLayout>

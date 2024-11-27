@@ -1,0 +1,4 @@
+<resources>
+    <!-- 팝업창의 너비 설정 -->
+    <dimen name="popup_width">250dp</dimen>
+</resources>
