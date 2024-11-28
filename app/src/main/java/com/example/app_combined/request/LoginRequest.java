@@ -11,28 +11,32 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginRequest extends StringRequest{
+public class LoginRequest extends StringRequest {
 
-    //서버 URL 설정(php 파일 연동)
-    final static private String URL = "http://localhost:8080/api/auth/login";
-    private Map<String, String> map;
+    // 서버 URL 설정: localhost -> 10.0.2.2 (에뮬레이터), IP 주소 (실제 기기 사용 시)
+    private static final String URL = "http://10.0.2.2:8080/api/user/login";
+    private final Map<String, String> map;
 
-    public LoginRequest(String UserEmail, String UserPwd, Response.Listener<String> listener) {
+    public LoginRequest(String userId, String passWord, Response.Listener<String> listener) {
         super(Request.Method.POST, URL, listener, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // 오류 처리 (예: 로그 출력)
+                // 네트워크 오류 처리
+                if (error.networkResponse != null) {
+                    Log.e("LoginRequest", "Error Code: " + error.networkResponse.statusCode);
+                }
                 Log.e("LoginRequest", "Error: " + error.getMessage());
             }
         });
 
+        // 요청 파라미터 설정
         map = new HashMap<>();
-        map.put("UserEmail", UserEmail);
-        map.put("UserPwd", UserPwd);
+        map.put("UserId", userId);
+        map.put("passWord", passWord);
     }
 
     @Override
-    protected Map<String, String>getParams() throws AuthFailureError {
+    protected Map<String, String> getParams() throws AuthFailureError {
         return map;
     }
 }

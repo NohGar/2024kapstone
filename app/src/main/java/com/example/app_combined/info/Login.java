@@ -64,8 +64,8 @@ public class Login extends AppCompatActivity {
         login_button.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String UserEmail = login_email.getText().toString();
-                String UserPwd = login_password.getText().toString();
+                String UserId = login_email.getText().toString();
+                String passWord = login_password.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -76,9 +76,9 @@ public class Login extends AppCompatActivity {
 
                             if(success) {//로그인 성공시
 
-                                String UserEmail = jsonObject.getString( "UserEmail" );
-                                String UserPwd = jsonObject.getString( "UserPwd" );
-                                String UserName = jsonObject.getString( "UserName" );
+                                String UserEmail = jsonObject.getString( "UserId" );
+                                String UserPwd = jsonObject.getString( "passWord" );
+                                String UserName = jsonObject.getString( "name" );
 
                                 Toast.makeText( getApplicationContext(), String.format("%s님 환영합니다.", UserName), Toast.LENGTH_SHORT ).show();
                                 Intent intent = new Intent( Login.this, MainActivity.class );
@@ -99,7 +99,7 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 };
-                LoginRequest loginRequest = new LoginRequest( UserEmail, UserPwd, responseListener );
+                LoginRequest loginRequest = new LoginRequest( UserId, passWord, responseListener );
                 RequestQueue queue = Volley.newRequestQueue( Login.this );
                 queue.add( loginRequest );
 
