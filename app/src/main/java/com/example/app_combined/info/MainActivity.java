@@ -17,6 +17,7 @@ import com.example.app_combined.frags.Profile;
 import com.example.app_combined.frags.pose;
 import com.example.app_combined.frags.stats;
 import com.example.app_combined.frags.work;
+import com.example.app_combined.model.AuthResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,12 +26,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent deliveredIntent = getIntent();
+        String accessToken = deliveredIntent.getStringExtra("accessToken");
+        String tokenType = deliveredIntent.getStringExtra("tokenType");
+        AuthResponse authResponse = new AuthResponse(accessToken,tokenType);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         replaceFragment(new pose());
-
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
-
             int itemId = item.getItemId();
             if (itemId == R.id.nav_stat) {
                 replaceFragment(new stats());
@@ -51,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+
+
     }
+
 
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
