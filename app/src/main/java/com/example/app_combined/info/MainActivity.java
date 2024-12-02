@@ -17,6 +17,7 @@ import com.example.app_combined.frags.Profile;
 import com.example.app_combined.frags.pose;
 import com.example.app_combined.frags.stats;
 import com.example.app_combined.frags.work;
+import com.example.app_combined.model.AuthResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new pose());
+
+        //login, Signup에서 전달받은거
+        Intent infoIntent = getIntent();
+        final String token = infoIntent.getStringExtra("accessToken");
+        final String tokenType = infoIntent.getStringExtra("tokenType");
+        AuthResponse userAuth = new AuthResponse(token, tokenType);
+
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
 

@@ -16,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.app_combined.R;
-import com.example.app_combined.request.RegisterRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -149,10 +148,6 @@ public class Signup extends AppCompatActivity {
 
                     }
                 };
-                RegisterRequest registerRequest = new RegisterRequest( UserEmail, UserPwd1, UserName, responseListener);
-                RequestQueue queue = Volley.newRequestQueue( Signup.this );
-                queue.add( registerRequest );
-
 
             }
         });
