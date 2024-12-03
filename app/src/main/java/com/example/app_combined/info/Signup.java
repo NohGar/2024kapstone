@@ -16,10 +16,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.app_combined.R;
-import com.example.app_combined.request.RegisterRequest;
+import com.example.app_combined.api.AuthApi;
+import com.example.app_combined.model.AuthResponse;
+import com.example.app_combined.model.SignupRequest;
+import com.example.app_combined.retrofit.RetrofitService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class Signup extends AppCompatActivity {
 
@@ -93,68 +102,48 @@ public class Signup extends AppCompatActivity {
         });
         //회원가입 완료 버튼
         btn_submit = findViewById(R.id.signupbutton);
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String UserEmail = signup_email.getText().toString();
-                final String UserPwd1 = signup_pw.getText().toString();
-                final String UserName = signup_name.getText().toString();
-                final String UserPwd2 = signup_pw2.getText().toString();
+        btn_submit.setOnClickListener(view -> {
+                    final String name = signup_name.getText().toString().trim();
+                    final String email = signup_email.getText().toString().trim();
+                    final String password = signup_pw.getText().toString().trim();
+                    final String passwordConfirm = signup_pw2.getText().toString().trim();
 
-                //이메일 중복체크 확인
-                if (!validate) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
-                    dialog = builder.setMessage("중복된 아이디가 있는지 확인하세요.").setNegativeButton("확인", null).create();
-                    dialog.show();
-                    return;
-                }
+                    //빈칸 체크
+                    if (name.isEmpty() || email.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
+                        dialog = builder.setMessage("모두 입력해주세요.").setNegativeButton("확인", null).create();
+                        dialog.show();
+                        return;
+                    }
 
-                //빈칸 체크
-                if (UserEmail.equals("") || UserPwd1.equals("") || UserName.equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
-                    dialog = builder.setMessage("모두 입력해주세요.").setNegativeButton("확인", null).create();
-                    dialog.show();
-                    return;
-                }
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                    SignupRequest signupRequest = new SignupRequest(name, email, password, passwordConfirm);
+                    RetrofitService retrofitService = new RetrofitService();
+                    AuthApi authApi = retrofitService.getRetrofit().create(AuthApi.class);
 
-                        try {
-                            JSONObject jsonObject = new JSONObject( response );
-                            boolean success = jsonObject.getBoolean( "success" );
-                            //회원가입 성공시
-                            if(UserPwd1.equals(UserPwd2)) {
-                                if (success) {
-                                    //성공시 로그인 창으로 회귀
-                                    Toast.makeText(getApplicationContext(), String.format("%s님 가입을 환영합니다.", UserName), Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Signup.this, Login.class);
-                                    startActivity(intent);
+                    authApi.register(signupRequest).enqueue(new Callback<AuthResponse>() {
+                        @Override
+                        public void onResponse(Call<AuthResponse> call, retrofit2.Response<AuthResponse> response) {
+                            Toast.makeText(Signup.this, "통신 성공", Toast.LENGTH_LONG).show();
+                            if (response.isSuccessful()) {
+                                AuthResponse authResponse = response.body();
 
-                                    //회원가입 실패시
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
+                                //왠지 모르겠는데 안넘어간다.
+                                Intent intent = new Intent(Signup.this, Login.class);
+                                startActivity(intent);
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
-                                dialog = builder.setMessage("비밀번호가 동일하지 않습니다.").setNegativeButton("확인", null).create();
-                                dialog.show();
-                                return;
+                                // Todo
+                                //  전달받은 오류 message 출력( 지금은 공백이 뜬다. )
+                                Toast.makeText(Signup.this, response.message(), Toast.LENGTH_LONG).show();
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
 
-                    }
-                };
-                RegisterRequest registerRequest = new RegisterRequest( UserEmail, UserPwd1, UserName, responseListener);
-                RequestQueue queue = Volley.newRequestQueue( Signup.this );
-                queue.add( registerRequest );
+                        @Override
+                        public void onFailure(Call<AuthResponse> call, Throwable throwable) {
+                            Toast.makeText(Signup.this, "통신 실패", Toast.LENGTH_LONG).show();
+                            Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, "Error occurred", throwable);
+                        }
+                    });
 
-
-            }
         });
 
     }
