@@ -158,7 +158,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                     val landmarks = poseLandmarkerResult.landmarks().get(0)
 
                     // 팔꿈치(14) -> 손목(16)
-                    linePaint.color = if (feedback1_status) Color.GREEN else Color.RED
+                    linePaint.color = if (feedback1_status) Color.argb(90, 0, 255, 0) else Color.argb(90, 255, 0, 0)
                     canvas.drawLine(
                         landmarks.get(14).x() * imageWidth * scaleFactor,
                         landmarks.get(14).y() * imageHeight * scaleFactor,
