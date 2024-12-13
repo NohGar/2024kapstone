@@ -1,25 +1,20 @@
 package com.example.app_combined.info;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_combined.R;
 import com.example.app_combined.api.AuthApi;
 import com.example.app_combined.model.AuthResponse;
 import com.example.app_combined.model.LoginRequest;
 import com.example.app_combined.retrofit.RetrofitService;
-
-import org.json.JSONException; // json 데이터 처리 중 발생하는 오류를 나타내는 예외 클래스
-import org.json.JSONObject; // json의 객체를 표현하는 클래스, json형식의 데이터들을 처리하는 데 사용
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,7 +59,7 @@ public class Login extends AppCompatActivity {
         login_password = findViewById( R.id.login_Password );
         login_button = findViewById( R.id.btn_login );
 
-        RetrofitService retrofitService = new RetrofitService();
+        RetrofitService retrofitService = new RetrofitService(this);
         AuthApi authApi = retrofitService.getRetrofit().create(AuthApi.class);
 
         login_button.setOnClickListener(view -> {
@@ -81,6 +76,30 @@ public class Login extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 AuthResponse authResponse = response.body();
 
+//                                // Access Token 로그 출력
+//                                Log.d("AuthResponse", "Access Token: " + authResponse.getAccessToken());
+//
+//                                // 모든 쿠키 출력
+//                                Log.d("ResponseHeaders", response.headers().toString());
+//
+//                                // Refresh-Token 값 가져오기
+//                                PersistentCookieJar persistentCookieJar = retrofitService.getCookieJar();
+//                                String refreshToken = persistentCookieJar.getCookieValue("Refresh-Token");
+//
+//                                // Refresh Token 로그 출력
+//                                if (refreshToken != null) {
+//                                    Log.d("AuthResponse", "Refresh Token: " + refreshToken);
+//                                } else {
+//                                    Log.e("AuthResponse", "Refresh Token not found in cookies.");
+//                                }
+//
+//                                SharedPreferences sharedPreferences = getSharedPreferences("CookiePrefs", MODE_PRIVATE);
+//                                Map<String, ?> allEntries = sharedPreferences.getAll();
+//                                for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+//                                    Log.d("SharedPreferences", entry.getKey() + ": " + entry.getValue().toString());
+//                                }
+
+                                // MainActivity로 이동
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 intent.putExtra("accessToken", authResponse.getAccessToken());
                                 intent.putExtra("tokenType", authResponse.getTokenType());
