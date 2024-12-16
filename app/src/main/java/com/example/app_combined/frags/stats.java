@@ -41,12 +41,12 @@ public class stats extends Fragment {
         BarChart barChart = view.findViewById(R.id.barchart1);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, 30));
-        entries.add(new BarEntry(1, 60));
-        entries.add(new BarEntry(2, 45));
-        entries.add(new BarEntry(4, 33));
-        entries.add(new BarEntry(5, 52));
-        entries.add(new BarEntry(6, 98));
+        entries.add(new BarEntry(0, 110));
+        entries.add(new BarEntry(1, 209));
+        entries.add(new BarEntry(2, 77));
+        entries.add(new BarEntry(4, 120));
+        entries.add(new BarEntry(5, 302));
+        entries.add(new BarEntry(6, 52));
 
         BarDataSet dataSet = new BarDataSet(entries, "");
         dataSet.setColors(new int[]{
@@ -85,9 +85,9 @@ public class stats extends Fragment {
         // MaterialCalendarView 초기화
         MaterialCalendarView calendarView = view.findViewById(R.id.calendarView);
 
-        CalendarDay date1 = CalendarDay.from(2024, 10, 12);
-        CalendarDay date2 = CalendarDay.from(2024, 10, 15);
-        CalendarDay date3 = CalendarDay.from(2024, 10, 21);
+        CalendarDay date1 = CalendarDay.from(2024, 11, 12);
+        CalendarDay date2 = CalendarDay.from(2024, 11, 16);
+        CalendarDay date3 = CalendarDay.from(2024, 11, 17);
 
         CircleDecorator decorator = new CircleDecorator(Arrays.asList(date1, date2, date3), requireActivity());
         calendarView.addDecorator(decorator);
