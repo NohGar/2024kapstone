@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new pose());
+        replaceFragment(new Profile());
+
 
         //login, Signup에서 전달받은거
         Intent infoIntent = getIntent();
         final String token = infoIntent.getStringExtra("accessToken");
         final String tokenType = infoIntent.getStringExtra("tokenType");
         AuthResponse userAuth = new AuthResponse(token, tokenType);
-
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
 
@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity2.class);
                 // MainActivity로 전환
                 startActivity(intent);
-            } else if (itemId == R.id.nav_pose) {
-                // MainActivity로 이동하는 Intent 생성
-                Intent intent = new Intent(this, MainActivity2.class);
-                // MainActivity로 전환
-                startActivity(intent);
+//            } else if (itemId == R.id.nav_pose) {
+//                // MainActivity로 이동하는 Intent 생성
+//                Intent intent = new Intent(this, MainActivity2.class);
+//                // MainActivity로 전환
+//                startActivity(intent);
             }else if(itemId == R.id.nav_profile){
                 replaceFragment(new Profile());
             }

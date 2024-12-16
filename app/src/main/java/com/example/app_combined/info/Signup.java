@@ -36,7 +36,7 @@ public class Signup extends AppCompatActivity {
     private EditText signup_name, signup_pw, signup_pw2, signup_email;
     private Button btn_emailcheck, btn_submit;
     private AlertDialog dialog;
-    private boolean validate = false;
+    private boolean validate = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,13 +126,14 @@ public class Signup extends AppCompatActivity {
                             Toast.makeText(Signup.this, "통신 성공", Toast.LENGTH_LONG).show();
                             if (response.isSuccessful()) {
                                 AuthResponse authResponse = response.body();
-
+                                Toast.makeText(Signup.this, "가입 성공", Toast.LENGTH_LONG).show();
                                 //왠지 모르겠는데 안넘어간다.
                                 Intent intent = new Intent(Signup.this, Login.class);
                                 startActivity(intent);
                             } else {
                                 // Todo
                                 //  전달받은 오류 message 출력( 지금은 공백이 뜬다. )
+                                Toast.makeText(Signup.this, "error", Toast.LENGTH_LONG).show();
                                 Toast.makeText(Signup.this, response.message(), Toast.LENGTH_LONG).show();
                             }
                         }
