@@ -117,7 +117,7 @@ public class Signup extends AppCompatActivity {
                     }
 
                     SignupRequest signupRequest = new SignupRequest(name, email, password, passwordConfirm);
-                    RetrofitService retrofitService = new RetrofitService();
+                    RetrofitService retrofitService = new RetrofitService(this);
                     AuthApi authApi = retrofitService.getRetrofit().create(AuthApi.class);
 
                     authApi.register(signupRequest).enqueue(new Callback<AuthResponse>() {
